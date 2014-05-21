@@ -1,0 +1,5 @@
+---
+file: partial
+---
+@import "{{ page.file }}";
+body { background: $bg; }

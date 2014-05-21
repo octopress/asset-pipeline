@@ -1,0 +1,4 @@
+gems:
+  - octopress-asset-pipeline
+
+exclude: [Gemfile*]
