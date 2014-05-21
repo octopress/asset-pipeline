@@ -44,14 +44,25 @@ module Octopress
         end
 
         def stylesheets
-          @css.clone.concat @sass
+          order(@css.clone.concat(@sass), Ink.config['order_css'] || [])
         end
 
         def javascripts
-          @js.clone.concat @coffee
+          order(@js.clone.concat(@coffee), Ink.config['order_js'] || [])
         end
 
         private
+
+        def order(files, config)
+          sorted = []
+          config.each do |item|
+            files.each do |file|
+              sorted << files.delete(file) if file.path.include? item
+            end
+          end
+
+          sorted.concat files
+        end
 
         def add_stylesheets
           add_sass
