@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Octopress::Ink::LocalAssetPipeline::VERSION
   spec.authors       = ["Brandon Mathis"]
   spec.email         = ["brandon@imathis.com"]
-  spec.summary       = %q{For any Jekyll site, concat and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.}
-  spec.description   = %q{For any Jekyll site, concat and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.}
+  spec.summary       = %q{Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.}
+  spec.description   = %q{Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.}
   spec.homepage      = "https://github.com/octopress/asset-pipeline"
   spec.license       = "MIT"
 

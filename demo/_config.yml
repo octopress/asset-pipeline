@@ -1,4 +1,5 @@
 gems:
   - octopress-asset-pipeline
 
-exclude: [Gemfile*]
+exclude: 
+  - Gemfile*

@@ -17,7 +17,7 @@ module Octopress
             assets_path:   File.expand_path(File.join(File.dirname(__FILE__), "../../../assets")),
             type:          "plugin",
             version:       Octopress::Ink::LocalAssetPipeline::VERSION,
-            description:   "Concat and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.",
+            description:   "Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.",
             website:       "https://github.com/octopress/asset-pipeline"
           }
         end
@@ -35,10 +35,10 @@ module Octopress
             Ink.site.read_directories 
           end
 
-          if Ink.config['concat_css']
+          if Ink.config['combine_css']
             add_stylesheets
           end
-          if Ink.config['concat_js']
+          if Ink.config['combine_js']
             add_javascripts
           end
         end
@@ -60,6 +60,8 @@ module Octopress
               sorted << files.delete(file) if file.path.include? item
             end
           end
+
+          require 'pry-debugger'; binding.pry
 
           sorted.concat files
         end
