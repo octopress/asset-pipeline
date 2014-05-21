@@ -35,7 +35,7 @@ module Octopress
           end
 
           add_stylesheets
-          #add_javascripts
+          add_javascripts
         end
 
         # Return stylesheets to be combined in the asset pipeline
@@ -110,7 +110,7 @@ module Octopress
           Ink.site.static_files.each do |f| 
             if f.path =~ /\.css$/ 
               @css << Assets::LocalCssAsset.new(self, f)
-              Ink.site.static_files.delete(f)
+              Ink.site.static_files.delete(f) if combine_css
             end
           end
         end

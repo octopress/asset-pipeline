@@ -3,6 +3,3 @@ gems:
 
 exclude: 
   - Gemfile*
-
-order_js:
-  - foo.coffee
