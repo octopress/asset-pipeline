@@ -61,8 +61,6 @@ module Octopress
             end
           end
 
-          require 'pry-debugger'; binding.pry
-
           sorted.concat files
         end
 
