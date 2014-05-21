@@ -21,6 +21,10 @@ module Octopress
           file.relative_path.sub(filename,'').sub(/^\/(.+)\/$/,'\1')
         end
 
+        def destination
+          File.join(base, filename)
+        end
+
         def path
           file.path
         end

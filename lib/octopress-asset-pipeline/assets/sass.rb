@@ -18,6 +18,10 @@ module Octopress
           File.join(file.site.source, file.path)
         end
 
+        def destination
+          File.join(base, filename.sub(/@(.+?)\./,'.').sub(/s.ss/, 'css'))
+        end
+
         def compile
           PluginAssetPipeline.compile_sass(self)
         end

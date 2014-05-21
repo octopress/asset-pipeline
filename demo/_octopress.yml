@@ -1,2 +1,4 @@
 order_js:
   - foo.coffee
+
+combine_js: false

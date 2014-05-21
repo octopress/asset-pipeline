@@ -4,6 +4,7 @@ require 'octopress-asset-pipeline/version'
 require 'octopress-asset-pipeline/assets/local'
 require 'octopress-asset-pipeline/assets/css'
 require 'octopress-asset-pipeline/assets/sass'
+require 'octopress-asset-pipeline/assets/javascript'
 require 'octopress-asset-pipeline/assets/coffeescript'
 
 module Octopress
@@ -18,15 +19,13 @@ module Octopress
             type:          "plugin",
             version:       Octopress::Ink::LocalAssetPipeline::VERSION,
             description:   "Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.",
-            website:       "https://github.com/octopress/asset-pipeline"
+            website:       "https://github.com/octopress/asset-pipeline",
+            local: true
           }
         end
 
-        def config
-          @config ||= Ink.config
-        end
-
         def register
+          @config ||= Ink.config
           # Tell Jekyll to read static files and pages
           # This is necessary when Jekyll isn't being asked to build a site,
           # like when a user runs the list command to list assets
@@ -35,25 +34,55 @@ module Octopress
             Ink.site.read_directories 
           end
 
-          if Ink.config['combine_css']
-            add_stylesheets
-          end
-          if Ink.config['combine_js']
-            add_javascripts
-          end
+          add_stylesheets
+          #add_javascripts
         end
 
+        # Return stylesheets to be combined in the asset pipeline
         def stylesheets
-          order(@css.clone.concat(@sass), Ink.config['order_css'] || [])
+          sort(@css.clone.concat(@sass), @config['order_css'] || [])
         end
 
         def javascripts
-          order(@js.clone.concat(@coffee), Ink.config['order_js'] || [])
+          sort(@js.clone.concat(@coffee), @config['order_js'] || [])
         end
 
         private
 
-        def order(files, config)
+        def combine_js
+          @config['combine_js']
+        end
+
+        def combine_css
+          @config['combine_css']
+        end
+
+        def add_stylesheets
+          add_css
+          add_sass
+
+          if !combine_css
+            # Add tags for {% js_asset_tag %}
+            stylesheets.each { |f| Plugins.add_css_tag(f.tag) }
+            @css.clear
+            @sass.clear
+          end
+
+        end
+
+        def add_javascripts
+          add_js
+          add_coffee
+
+          if !combine_js
+            # Add tags for {% js_asset_tag %}
+            javascripts.each { |f| Plugins.add_js_tag(f.tag) }
+            @js.clear
+            @coffee.clear
+          end
+        end
+
+        def sort(files, config)
           sorted = []
           config.each do |item|
             files.each do |file|
@@ -64,22 +93,13 @@ module Octopress
           sorted.concat files
         end
 
-        def add_stylesheets
-          add_sass
-          add_css
-        end
-
-        def add_javascripts
-          add_js
-          add_coffee
-        end
-
         # Finds all Sass files registered by Jekyll
         #
         def add_sass
           Ink.site.pages.each do |f| 
             if f.ext =~ /\.s[ca]ss/ 
-              @sass << Assets::LocalSassAsset.new(self, Ink.site.pages.delete(f))
+              @sass << Assets::LocalSassAsset.new(self, f)
+              Ink.site.pages.delete(f) if combine_css
             end
           end
         end
@@ -89,7 +109,8 @@ module Octopress
         def add_css
           Ink.site.static_files.each do |f| 
             if f.path =~ /\.css$/ 
-              @css << Assets::LocalCssAsset.new(self, Ink.site.static_files.delete(f))
+              @css << Assets::LocalCssAsset.new(self, f)
+              Ink.site.static_files.delete(f)
             end
           end
         end
@@ -99,7 +120,8 @@ module Octopress
         def add_coffee
           Ink.site.pages.each do |f| 
             if f.ext =~ /\.coffee$/ 
-              @coffee << Assets::LocalCoffeeScriptAsset.new(self, Ink.site.pages.delete(f))
+              @coffee << Assets::LocalCoffeeScriptAsset.new(self, f)
+              Ink.site.pages.delete(f) if combine_js
             end
           end
         end
@@ -109,7 +131,8 @@ module Octopress
         def add_js
           Ink.site.static_files.each do |f| 
             if f.path =~ /\.js$/ 
-              @js << Assets::LocalAsset.new(self, Ink.site.static_files.delete(f))
+              @js << Assets::LocalJavaScriptAsset.new(self, f)
+              Ink.site.static_files.delete(f) if combine_js
             end
           end
         end

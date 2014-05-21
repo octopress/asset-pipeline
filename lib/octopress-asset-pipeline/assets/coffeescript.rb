@@ -1,7 +1,7 @@
 module Octopress
   module Ink
     module Assets
-      class LocalCoffeeScriptAsset < LocalAsset
+      class LocalCoffeeScriptAsset < LocalJavaScriptAsset
         def read
           compile
         end
@@ -12,6 +12,10 @@ module Octopress
 
         def compile
           ::CoffeeScript.compile(render_page)
+        end
+
+        def destination
+          File.join(base, filename.sub(/\.coffee/,'.js'))
         end
       end
     end
