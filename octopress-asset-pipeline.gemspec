@@ -22,5 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "octopress"
   
-  spec.add_runtime_dependency "octopress-ink"
+  spec.add_runtime_dependency "octopress-ink", "~> 1.0.0.rc.1"
 end
