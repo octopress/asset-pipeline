@@ -1,0 +1,5 @@
+gems:
+  - octopress-asset-pipeline
+
+source: source
+destination: site

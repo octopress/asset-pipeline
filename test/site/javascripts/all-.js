@@ -1,0 +1,1 @@
+(function(){console.log("hi")}).call(this),console.log("Yo I'm a javascript");
