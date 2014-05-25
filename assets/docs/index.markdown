@@ -1,4 +1,6 @@
-# Octopress Asset Pipeline
+---
+title: "Octopress Asset Pipeline"
+---
 
 Combine and compress and fingerprint Stylesheets (CSS and Sass) and Javascripts (JS and Coffeescript) to a single fingerprinted .css or .js file.
 

@@ -7,4 +7,8 @@ build
 
 test_dirs('Site build', 'site', 'expected')
 
+#build({:octopress_config => '_concat_false.yml'})
+
+#test_dirs('Site build', 'site', 'concat_false')
+
 print_results

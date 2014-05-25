@@ -1,1 +1,1 @@
-(function(){console.log("hi")}).call(this),console.log("Yo I'm a javascript");
+console.log("Yo I'm a javascript")(function(){console.log("hi")}).call(this);

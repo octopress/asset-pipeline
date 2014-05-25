@@ -1,0 +1,4 @@
+order_js:
+  - foo.coffee
+combine_js: false
+combine_css: false
