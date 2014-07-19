@@ -1,0 +1,8 @@
+-
+  build: true
+  compare: expected site
+-
+  build: true
+  config:
+    octopress: _combine_false.yml
+  compare: combine_false site

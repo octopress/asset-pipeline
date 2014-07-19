@@ -5,4 +5,5 @@ group :octopress do
   gem 'octopress-ink', path: '../../ink'
   gem 'octopress-asset-pipeline', path: '../'
   gem 'pry-debugger'
+  gem 'clash'
 end

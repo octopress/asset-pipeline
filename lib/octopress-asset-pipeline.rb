@@ -25,7 +25,6 @@ module Octopress
         end
 
         def register
-          @config ||= Ink.config
           # Tell Jekyll to read static files and pages
           # This is necessary when Jekyll isn't being asked to build a site,
           # like when a user runs the list command to list assets
@@ -38,23 +37,27 @@ module Octopress
           add_javascripts
         end
 
+        def config
+          Ink.config
+        end
+
         # Return stylesheets to be combined in the asset pipeline
         def stylesheets
-          sort(@css.clone.concat(@sass), @config['order_css'] || [])
+          sort(@css.clone.concat(@sass), config['order_css'] || [])
         end
 
         def javascripts
-          sort(@js.clone.concat(@coffee), @config['order_js'] || [])
+          sort(@js.clone.concat(@coffee), config['order_js'] || [])
         end
 
         private
 
         def combine_js
-          @config['combine_js']
+          config['combine_js']
         end
 
         def combine_css
-          @config['combine_css']
+          config['combine_css']
         end
 
         def add_stylesheets
