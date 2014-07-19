@@ -1,5 +1,4 @@
 ---
-file: partial
 ---
-@import "{{ page.file }}";
+@import "partial";
 body { background: $bg; }
