@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 group :octopress do
   gem 'octopress'
-  gem 'octopress-ink', path: '../../ink'
+  gem 'octopress-ink'
   gem 'octopress-asset-pipeline', path: '../'
   gem 'pry-debugger'
   gem 'clash'
