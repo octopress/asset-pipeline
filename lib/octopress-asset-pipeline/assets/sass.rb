@@ -3,11 +3,11 @@ module Octopress
     module Assets
       class LocalSassAsset < LocalCssAsset
         def read
-          compile
+          @compiled ||= compile
         end
 
         def content
-          render_page
+          render
         end
 
         def ext
@@ -15,7 +15,7 @@ module Octopress
         end
 
         def path
-          File.join(file.site.source, file.path)
+          Pathname.new File.join(Octopress.site.source, file.path)
         end
 
         def destination

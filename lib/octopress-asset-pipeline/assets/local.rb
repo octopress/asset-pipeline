@@ -26,26 +26,16 @@ module Octopress
         end
 
         def path
-          file.path
+          Pathname.new file.path
         end
 
         def read
-          File.open(path).read
+          path.read
         end
 
         # Copy is unncessary with local assets
         #
         def copy(target_dir); end
-
-        private
-
-        def render_page
-          payload = Ink.site.site_payload
-          payload['page'] = file.data
-
-          render_liquid(file.content, payload)
-        end
-
       end
     end
   end

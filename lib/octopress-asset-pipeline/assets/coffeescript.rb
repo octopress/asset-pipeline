@@ -3,15 +3,15 @@ module Octopress
     module Assets
       class LocalCoffeeScriptAsset < LocalJavaScriptAsset
         def read
-          compile
-        end
-
-        def path
-          File.join(file.site.source, file.path)
+          @compiled ||= compile
         end
 
         def compile
-          ::CoffeeScript.compile(render_page)
+          ::CoffeeScript.compile(file.content)
+        end
+
+        def path
+          Pathname.new File.join(Octopress.site.source, file.path)
         end
 
         def destination

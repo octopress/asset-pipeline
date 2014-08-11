@@ -3,7 +3,7 @@ module Octopress
     module Assets
       class LocalCssAsset < LocalAsset
         def media
-          path.scan(/@(.+?)\./).flatten[0] || 'all'
+          path.to_s.scan(/@(.+?)\./).flatten[0] || 'all'
         end
 
         def destination
@@ -11,7 +11,7 @@ module Octopress
         end
 
         def tag
-          "<link href='#{Filters.expand_url(File.join(destination))}' media='#{media}' rel='stylesheet' type='text/css'>"
+          "<link href='#{Filters.expand_url(destination)}' media='#{media}' rel='stylesheet' type='text/css'>"
         end
       end
     end

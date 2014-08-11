@@ -29,8 +29,8 @@ module Octopress
           # This is necessary when Jekyll isn't being asked to build a site,
           # like when a user runs the list command to list assets
           #
-          if Ink.site.pages.empty? && Ink.site.posts.empty?
-            Ink.site.read_directories 
+          if Octopress.site.pages.empty? && Octopress.site.posts.empty?
+            Octopress.site.read_directories 
           end
 
           add_stylesheets
@@ -38,7 +38,7 @@ module Octopress
         end
 
         def config
-          Ink.config
+          Octopress.config
         end
 
         # Return stylesheets to be combined in the asset pipeline
@@ -89,7 +89,7 @@ module Octopress
           sorted = []
           config.each do |item|
             files.each do |file|
-              sorted << files.delete(file) if file.path.include? item
+              sorted << files.delete(file) if file.path.to_s.include? item
             end
           end
 
@@ -99,10 +99,10 @@ module Octopress
         # Finds all Sass files registered by Jekyll
         #
         def add_sass
-          Ink.site.pages.each do |f| 
+          Octopress.site.pages.each do |f| 
             if f.ext =~ /\.s[ca]ss/ 
               @sass << Assets::LocalSassAsset.new(self, f)
-              Ink.site.pages.delete(f) if combine_css
+              Octopress.site.pages.delete(f) if combine_css
             end
           end
         end
@@ -110,10 +110,10 @@ module Octopress
         # Finds all CSS files registered by Jekyll
         #
         def add_css
-          Ink.site.static_files.each do |f| 
+          Octopress.site.static_files.each do |f| 
             if f.path =~ /\.css$/ 
               @css << Assets::LocalCssAsset.new(self, f)
-              Ink.site.static_files.delete(f) if combine_css
+              Octopress.site.static_files.delete(f) if combine_css
             end
           end
         end
@@ -121,10 +121,10 @@ module Octopress
         # Finds all Coffeescript files registered by Jekyll
         #
         def add_coffee
-          Ink.site.pages.each do |f| 
+          Octopress.site.pages.each do |f| 
             if f.ext =~ /\.coffee$/ 
               @coffee << Assets::LocalCoffeeScriptAsset.new(self, f)
-              Ink.site.pages.delete(f) if combine_js
+              Octopress.site.pages.delete(f) if combine_js
             end
           end
         end
@@ -132,10 +132,10 @@ module Octopress
         # Finds all Javascript files registered by Jekyll
         #
         def add_js
-          Ink.site.static_files.each do |f| 
+          Octopress.site.static_files.each do |f| 
             if f.path =~ /\.js$/ 
               @js << Assets::LocalJavaScriptAsset.new(self, f)
-              Ink.site.static_files.delete(f) if combine_js
+              Octopress.site.static_files.delete(f) if combine_js
             end
           end
         end
