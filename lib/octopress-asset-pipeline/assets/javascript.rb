@@ -1,7 +1,7 @@
 module Octopress
   module Ink
-    module Assets
-      class LocalJavaScriptAsset < LocalAsset
+    module LocalAssets
+      class Javascript < LocalAssets::Asset
         def tag
           "<script src='#{Filters.expand_url(destination)}'></script>"
         end

@@ -65,10 +65,9 @@ module Octopress
           add_sass
 
           if !combine_css
-            # Add tags for {% js_asset_tag %}
+            # Add tags for {% css_asset_tag %}
             stylesheets.each { |f| Plugins.add_css_tag(f.tag) }
             @css.clear
-            @sass.clear
           end
 
         end
@@ -101,8 +100,8 @@ module Octopress
         def add_sass
           Octopress.site.pages.each do |f| 
             if f.ext =~ /\.s[ca]ss/ 
-              @sass << Assets::LocalSassAsset.new(self, f)
-              Octopress.site.pages.delete(f) if combine_css
+              @sass << LocalAssets::Sass.new(self, f)
+              Octopress.site.pages.delete(f)
             end
           end
         end
@@ -112,7 +111,7 @@ module Octopress
         def add_css
           Octopress.site.static_files.each do |f| 
             if f.path =~ /\.css$/ 
-              @css << Assets::LocalCssAsset.new(self, f)
+              @css << LocalAssets::Css.new(self, f)
               Octopress.site.static_files.delete(f) if combine_css
             end
           end
@@ -123,7 +122,7 @@ module Octopress
         def add_coffee
           Octopress.site.pages.each do |f| 
             if f.ext =~ /\.coffee$/ 
-              @coffee << Assets::LocalCoffeeScriptAsset.new(self, f)
+              @coffee << LocalAssets::Coffeescript.new(self, f)
               Octopress.site.pages.delete(f) if combine_js
             end
           end
@@ -134,7 +133,7 @@ module Octopress
         def add_js
           Octopress.site.static_files.each do |f| 
             if f.path =~ /\.js$/ 
-              @js << Assets::LocalJavaScriptAsset.new(self, f)
+              @js << LocalAssets::Javascript.new(self, f)
               Octopress.site.static_files.delete(f) if combine_js
             end
           end

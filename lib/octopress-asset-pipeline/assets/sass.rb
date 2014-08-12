@@ -1,15 +1,7 @@
 module Octopress
   module Ink
-    module Assets
-      class LocalSassAsset < LocalCssAsset
-        def read
-          @compiled ||= compile
-        end
-
-        def content
-          render
-        end
-
+    module LocalAssets
+      class Sass < LocalAssets::Css
         def ext
           file.ext
         end
@@ -19,7 +11,15 @@ module Octopress
         end
 
         def destination
-          File.join(base, filename.sub(/@(.+?)\./,'.').sub(/s.ss/, 'css'))
+          super.sub(/\.s[ca]ss$/, '.css')
+        end
+
+        def add
+          Plugins.static_files << StaticFileContent.new(compile, destination)
+        end
+
+        def data
+          file.data
         end
 
         def compile

@@ -1,11 +1,7 @@
 module Octopress
   module Ink
-    module Assets
-      class LocalCoffeeScriptAsset < LocalJavaScriptAsset
-        def read
-          @compiled ||= compile
-        end
-
+    module LocalAssets
+      class Coffeescript < LocalAssets::Javascript
         def compile
           ::CoffeeScript.compile(file.content)
         end

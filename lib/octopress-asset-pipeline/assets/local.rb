@@ -1,7 +1,7 @@
 module Octopress
   module Ink
-    module Assets
-      class LocalAsset < Asset
+    module LocalAssets
+      class Asset < Ink::Assets::Asset
         def initialize(plugin, file)
           @plugin = plugin
           @file = file
@@ -27,10 +27,6 @@ module Octopress
 
         def path
           Pathname.new file.path
-        end
-
-        def read
-          path.read
         end
 
         # Copy is unncessary with local assets

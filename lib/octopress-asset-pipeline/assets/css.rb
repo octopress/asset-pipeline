@@ -1,7 +1,7 @@
 module Octopress
   module Ink
-    module Assets
-      class LocalCssAsset < LocalAsset
+    module LocalAssets
+      class Css < LocalAssets::Asset
         def media
           path.to_s.scan(/@(.+?)\./).flatten[0] || 'all'
         end
