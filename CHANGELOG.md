@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.3 - 2014-08-17
+
+- Updated to latest Octopress Ink.
+
 ### 1.0.3 - 2014-08-11
 
 - Cleaned up asset methods, added back Sass rendering through liquid.
