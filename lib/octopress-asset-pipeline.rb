@@ -1,3 +1,4 @@
+require 'octopress'
 require 'octopress-ink'
 require 'octopress-asset-pipeline/version'
 
@@ -15,11 +16,11 @@ module Octopress
           {
             name:          "Octopress Asset Pipeline",
             slug:          "octopress-asset-pipeline",
-            assets_path:   File.expand_path(File.join(File.dirname(__FILE__), "../../../assets")),
+            path:          File.expand_path(File.join(File.dirname(__FILE__), "../")),
             type:          "plugin",
             version:       Octopress::Ink::LocalAssetPipeline::VERSION,
             description:   "Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.",
-            website:       "https://github.com/octopress/asset-pipeline",
+            source_url:    "https://github.com/octopress/asset-pipeline",
             local: true
           }
         end
@@ -38,7 +39,9 @@ module Octopress
         end
 
         def config
-          Octopress.config
+          @config ||= begin
+            Ink.configuration['asset_pipeline'].merge({'disable' => {}})
+          end
         end
 
         # Return stylesheets to be combined in the asset pipeline

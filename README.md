@@ -49,7 +49,7 @@ When Jekyll is compiled these will be replaced with something like this.
 ## Configuration
 
 This plugin integrates with the core asset pipeline system in Octopress Ink, therefore
-the configurations are set in the `_octopress.yml` configuration file.
+the configurations are set in the `_config.yml` configuration file under the `asset_pipeline` key.
 
 | Option               | Description                               | Default     |
 |:---------------------|:------------------------------------------|:------------|
@@ -67,13 +67,14 @@ By default when scripts and stylesheets are combined, they added based on
 their order in the file system. You can manually specify order like this:
 
 ```
-order_js
- - jquery.js
- - kittens.coffee
+asset_pipeline:
+  order_js:
+   - jquery.js
+   - kittens.coffee
 
-order_css
- - normalize.css
- - site.sass
+  order_css:
+   - normalize.css
+   - site.sass
 ```
 Assets will ordered as specified. Any additional assets will be appended based on their order in the file system.
 

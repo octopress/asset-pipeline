@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.0 - 2015-01-01
+
+- Now reads configuration from _config.yml under `asset_pipeline`.
+
 ### 1.0.3 - 2014-08-17
 
 - Updated to latest Octopress Ink.
