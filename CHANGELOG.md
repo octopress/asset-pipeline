@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.2 - 2015-01-02
+
+- Updated integration with Octopress Docs
+
 ### 1.1.1 - 2015-01-02
 
 - Added support for reading documentation through Octopress docs

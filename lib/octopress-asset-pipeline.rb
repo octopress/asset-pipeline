@@ -28,9 +28,10 @@ module Octopress
         # This is necessary when Jekyll isn't being asked to build a site,
         # like when a user runs the list command to list assets
         #
-        if ENV['OCTOPRESS_DOCS']
+        if Octopress::Docs.enabled?
           add_docs
-        else
+        end
+        if Octopress::Ink.enabled?
           add_files
         end
       end
