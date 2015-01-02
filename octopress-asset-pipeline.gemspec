@@ -5,7 +5,7 @@ require 'octopress-asset-pipeline/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "octopress-asset-pipeline"
-  spec.version       = Octopress::Ink::LocalAssetPipeline::VERSION
+  spec.version       = Octopress::AssetPipeline::VERSION
   spec.authors       = ["Brandon Mathis"]
   spec.email         = ["brandon@imathis.com"]
   spec.summary       = %q{Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.}

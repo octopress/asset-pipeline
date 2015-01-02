@@ -1,30 +1,28 @@
 module Octopress
-  module Ink
-    module LocalAssets
-      class Sass < LocalAssets::Css
-        def ext
-          file.ext
-        end
+  module AssetPipeline
+    class Sass < Css
+      def ext
+        file.ext
+      end
 
-        def path
-          Pathname.new File.join(Octopress.site.source, file.path)
-        end
+      def path
+        Pathname.new File.join(Octopress.site.source, file.path)
+      end
 
-        def destination
-          super.sub(/\.s[ca]ss$/, '.css')
-        end
+      def destination
+        super.sub(/\.s[ca]ss$/, '.css')
+      end
 
-        def add
-          Plugins.static_files << StaticFileContent.new(compile, destination)
-        end
+      def add
+        Ink::Plugins.static_files << Ink::StaticFileContent.new(compile, destination)
+      end
 
-        def data
-          file.data
-        end
+      def data
+        file.data
+      end
 
-        def compile
-          PluginAssetPipeline.compile_sass(self)
-        end
+      def compile
+        Ink::PluginAssetPipeline.compile_sass(self)
       end
     end
   end

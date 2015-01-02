@@ -1,7 +1,5 @@
 module Octopress
-  module Ink
-    module LocalAssetPipeline
-      VERSION = "1.1.0"
-    end
+  module AssetPipeline
+    VERSION = "1.1.1"
   end
 end

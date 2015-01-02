@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.1 - 2015-01-02
+
+- Added support for reading documentation through Octopress docs
+
 ### 1.1.0 - 2015-01-01
 
 - Now reads configuration from _config.yml under `asset_pipeline`.
