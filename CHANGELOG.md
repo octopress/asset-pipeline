@@ -1,12 +1,16 @@
 # Changelog
 
+### 1.1.4 - 2015-01-05
+
+- Removed unnecessary files from gem build.
+
 ### 1.1.3 - 2015-01-05
 
-- Improvements to README
+- Improvements to README.
 
 ### 1.1.2 - 2015-01-02
 
-- Updated integration with Octopress Docs
+- Updated integration with Octopress Docs.
 
 ### 1.1.1 - 2015-01-02
 
