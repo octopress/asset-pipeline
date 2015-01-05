@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.3 - 2015-01-05
+
+- Improvements to README
+
 ### 1.1.2 - 2015-01-02
 
 - Updated integration with Octopress Docs

@@ -8,27 +8,26 @@ the necessary script or link tags.
 
 ## Installation
 
-Add this line to your site's Gemfile:
+### Using Bundler
 
-    gem 'octopress-asset-pipeline'
+Add this gem to your site's Gemfile in the `:jekyll_plugins` group:
 
-And then execute:
+    group :jekyll_plugins do
+      gem 'octopress-asset-pipeline'
+    end
+
+Then install the gem with Bundler
 
     $ bundle
 
-Or install it manually:
+### Manual Installation
 
     $ gem install octopress-asset-pipeline
 
+Then add the gem to your Jekyll configuration.
 
-### Add gem to Jekyll
-
-Add the gem to Jekyll's configuration file:
-
-```yaml
-gems:
-  - octopress-asset-pipeline
-```
+    gems:
+      -octopress-asset-pipeline
 
 ## Liquid tags
 

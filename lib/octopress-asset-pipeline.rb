@@ -14,10 +14,11 @@ module Octopress
       def configuration
         {
           name:          "Octopress Asset Pipeline",
+          gem:           "octopress-asset-pipeline",
           path:          File.expand_path(File.join(File.dirname(__FILE__), "../")),
           type:          "plugin",
           version:       Octopress::AssetPipeline::VERSION,
-          description:   "Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.",
+          description:   "Combine and compress Stylesheets and Javascripts into a single fingerprinted file.",
           source_url:    "https://github.com/octopress/asset-pipeline",
           local: true
         }
