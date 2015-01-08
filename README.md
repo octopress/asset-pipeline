@@ -65,7 +65,7 @@ the configurations are set in the `_config.yml` configuration file under the `as
 
 ### Ordering assets
 
-By default when scripts and stylesheets are combined, they added based on
+By default when scripts and stylesheets are combined, they are added based on
 their order in the file system. You can manually specify order like this:
 
 ```
