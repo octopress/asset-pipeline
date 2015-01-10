@@ -109,7 +109,7 @@ module Octopress
       # Finds all Sass files registered by Jekyll
       #
       def add_sass
-        Octopress.site.pages.each do |f| 
+        Octopress.site.pages.dup.each do |f| 
           if f.ext =~ /\.s[ca]ss/ 
             @sass << Sass.new(self, f)
             Octopress.site.pages.delete(f)
@@ -120,7 +120,7 @@ module Octopress
       # Finds all CSS files registered by Jekyll
       #
       def add_css
-        Octopress.site.static_files.each do |f| 
+        Octopress.site.static_files.dup.each do |f| 
           if f.path =~ /\.css$/ 
             @css << Css.new(self, f)
             Octopress.site.static_files.delete(f) if combine_css
@@ -131,7 +131,7 @@ module Octopress
       # Finds all Coffeescript files registered by Jekyll
       #
       def add_coffee
-        Octopress.site.pages.each do |f| 
+        Octopress.site.pages.dup.each do |f| 
           if f.ext =~ /\.coffee$/ 
             @coffee << Coffeescript.new(self, f)
             Octopress.site.pages.delete(f) if combine_js
@@ -142,7 +142,7 @@ module Octopress
       # Finds all Javascript files registered by Jekyll
       #
       def add_js
-        Octopress.site.static_files.each do |f| 
+        Octopress.site.static_files.dup.each do |f| 
           if f.path =~ /\.js$/ 
             @js << Javascript.new(self, f)
             Octopress.site.static_files.delete(f) if combine_js

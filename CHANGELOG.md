@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.5 - 2015-01-05
+
+- Fixed: Some files weren't getting added to the compiled output. [#7](https://github.com/octopress/asset-pipeline/issues/7)
+
 ### 1.1.4 - 2015-01-05
 
 - Removed unnecessary files from gem build.

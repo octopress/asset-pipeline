@@ -1,7 +1,7 @@
 -
   title: Typical build (combined and compressed)
   build: true
-  compare: expected/standard site
+  compare: _expected/standard _site
 -
   title: Combine CSS only
   build: true
@@ -9,7 +9,7 @@
     jekyll:
       - _config.yml
       - _combine_css_only.yml
-  compare: expected/css_tag_only site
+  compare: _expected/css_tag_only _site
 -
   title: Separate asset files
   build: true
@@ -17,4 +17,4 @@
     jekyll:
       - _config.yml
       - _combine_false.yml
-  compare: expected/no_combining site
+  compare: _expected/no_combining _site
