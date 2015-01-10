@@ -1,6 +1,10 @@
 # Changelog
 
-### 1.1.5 - 2015-01-05
+### 1.1.6 - 2015-01-09
+
+- Fixed: Enforced default sorting by path.
+
+### 1.1.5 - 2015-01-09
 
 - Fixed: Some files weren't getting added to the compiled output. [#7](https://github.com/octopress/asset-pipeline/issues/7)
 
