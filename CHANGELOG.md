@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.7 - 2015-01-14
+
+- Minified js support - file.min.js isn't compressed again, and is added first to build.
+
 ### 1.1.6 - 2015-01-09
 
 - Fixed: Enforced default sorting by path.
