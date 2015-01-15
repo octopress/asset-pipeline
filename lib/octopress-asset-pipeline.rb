@@ -2,7 +2,7 @@ require 'octopress'
 require 'octopress-ink'
 require 'octopress-asset-pipeline/version'
 
-require 'octopress-asset-pipeline/assets/local'
+require 'octopress-asset-pipeline/assets/asset'
 require 'octopress-asset-pipeline/assets/css'
 require 'octopress-asset-pipeline/assets/sass'
 require 'octopress-asset-pipeline/assets/javascript'
@@ -109,7 +109,7 @@ module Octopress
       # Finds all Sass files registered by Jekyll
       #
       def add_sass
-        Octopress.site.pages.dup.sort_by{|f| f.path}.each do |f| 
+        Octopress.site.pages.dup.sort_by(&:path).each do |f| 
           if f.ext =~ /\.s[ca]ss/ 
             @sass << Sass.new(self, f)
             Octopress.site.pages.delete(f)
@@ -120,7 +120,7 @@ module Octopress
       # Finds all CSS files registered by Jekyll
       #
       def add_css
-        Octopress.site.static_files.dup.sort_by{|f| f.path}.each do |f| 
+        Octopress.site.static_files.dup.sort_by(&:path).each do |f| 
           if f.path =~ /\.css$/ 
             @css << Css.new(self, f)
             Octopress.site.static_files.delete(f) if combine_css
@@ -131,7 +131,7 @@ module Octopress
       # Finds all Coffeescript files registered by Jekyll
       #
       def add_coffee
-        Octopress.site.pages.dup.sort_by{|f| f.path}.each do |f| 
+        Octopress.site.pages.dup.sort_by(&:path).each do |f| 
           if f.ext =~ /\.coffee$/ 
             @coffee << Coffeescript.new(self, f)
             Octopress.site.pages.delete(f) if combine_js
@@ -142,9 +142,13 @@ module Octopress
       # Finds all Javascript files registered by Jekyll
       #
       def add_js
-        Octopress.site.static_files.dup.sort_by{|f| f.path}.each do |f| 
+        Octopress.site.static_files.dup.sort_by(&:path).each do |f| 
           if f.path =~ /\.js$/ 
-            @js << Javascript.new(self, f)
+            if f.path =~ /\.min\.js$/i
+              @no_compress_js << Javascript.new(self, f)
+            else
+              @js << Javascript.new(self, f)
+            end
             Octopress.site.static_files.delete(f) if combine_js
           end
         end
