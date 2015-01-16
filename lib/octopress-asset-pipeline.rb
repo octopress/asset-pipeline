@@ -42,13 +42,19 @@ module Octopress
           Octopress.site.read_directories 
         end
 
+        add_static_files
+        add_page_files
         add_stylesheets
         add_javascripts
       end
 
       def config
         @config ||= begin
-          Ink.configuration['asset_pipeline'].merge({'disable' => {}})
+          c = Ink.configuration['asset_pipeline']
+          {
+            'stylesheets_dir' => ['stylesheets', 'css'],
+            'javascripts_dir' => ['javascripts', 'js']
+          }.merge(c).merge({ 'disable' => {} })
         end
       end
 
@@ -63,30 +69,31 @@ module Octopress
 
       private
 
-      def combine_js
-        config['combine_js']
+      def asset_dirs
+        [config['stylesheets_dir'], config['javascripts_dir']].flatten
+      end
+
+      def css_dirs
+        config['stylesheets_dir']
       end
 
       def combine_css
         config['combine_css']
       end
 
-      def add_stylesheets
-        add_css
-        add_sass
+      def combine_js
+        config['combine_js']
+      end
 
+      def add_stylesheets
         if !combine_css
           # Add tags for {% css_asset_tag %}
           stylesheets.each { |f| Ink::Plugins.add_css_tag(f.tag) }
           @css.clear
         end
-
       end
 
       def add_javascripts
-        add_js
-        add_coffee
-
         if !combine_js
           # Add tags for {% js_asset_tag %}
           javascripts.each { |f| Ink::Plugins.add_js_tag(f.tag) }
@@ -106,52 +113,62 @@ module Octopress
         sorted.concat files
       end
 
-      # Finds all Sass files registered by Jekyll
+      # Finds css and js files files registered by Jekyll
       #
-      def add_sass
-        Octopress.site.pages.dup.sort_by(&:path).each do |f| 
-          if f.ext =~ /\.s[ca]ss/ 
-            @sass << Sass.new(self, f)
-            Octopress.site.pages.delete(f)
-          end
-        end
-      end
+      def add_static_files
+        find_static_assets(asset_dirs, '.js', '.css').each do |f|
+          if f.path =~ /\.js$/ 
+            if f.path =~ /\.min\.js$/i
+              @no_compress_js << Javascript.new(self, f)
+            else f.path =~ /\.js$/ 
+              @js << Javascript.new(self, f)
+            end
+            Octopress.site.static_files.delete(f) if combine_js
 
-      # Finds all CSS files registered by Jekyll
-      #
-      def add_css
-        Octopress.site.static_files.dup.sort_by(&:path).each do |f| 
-          if f.path =~ /\.css$/ 
+          elsif f.path =~ /\.css$/
             @css << Css.new(self, f)
             Octopress.site.static_files.delete(f) if combine_css
           end
         end
       end
 
-      # Finds all Coffeescript files registered by Jekyll
+      # Finds Sass and Coffeescript files files registered by Jekyll
       #
-      def add_coffee
-        Octopress.site.pages.dup.sort_by(&:path).each do |f| 
+      def add_page_files
+        find_page_assets(asset_dirs, '.scss', '.sass', '.coffee').each do |f|
           if f.ext =~ /\.coffee$/ 
             @coffee << Coffeescript.new(self, f)
             Octopress.site.pages.delete(f) if combine_js
+          elsif f.ext =~ /\.s[ca]ss/ 
+            @sass << Sass.new(self, f)
+            Octopress.site.pages.delete(f) if combine_css
           end
         end
       end
 
-      # Finds all Javascript files registered by Jekyll
-      #
-      def add_js
-        Octopress.site.static_files.dup.sort_by(&:path).each do |f| 
-          if f.path =~ /\.js$/ 
-            if f.path =~ /\.min\.js$/i
-              @no_compress_js << Javascript.new(self, f)
-            else
-              @js << Javascript.new(self, f)
-            end
-            Octopress.site.static_files.delete(f) if combine_js
+      def find_static_assets(dirs, *extensions)
+        assets = Octopress.site.static_files.dup.sort_by(&:path)
+        find_assets(assets, dirs, extensions)
+      end
+
+      def find_page_assets(dirs, *extensions)
+        assets = Octopress.site.pages.dup.sort_by(&:path)
+        find_assets(assets, dirs, extensions)
+      end
+
+      def find_assets(assets, dirs, extensions)
+        assets.select do |f| 
+          if extensions.include?(File.extname(f.path))
+            path = f.path.sub(File.join(Octopress.site.source, ''), '')
+            in_dir?(path, dirs)
           end
         end
+      end
+
+      def in_dir?(file, *dirs)
+        dirs.flatten.select do |d| 
+          file.match(/^#{d}\//) 
+        end.size > 0
       end
     end
   end

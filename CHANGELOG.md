@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.0.0 - 2015-01-15
+
+- Change: Reads stylesheets from: `css/` and `stylesheets/`.
+- Change: Reads javascripts from: `js/` and `javascripts/`.
+- New: set asset directories with configurations: `stylesheets_dir` and `javascripts_dir`.
+
 ### 1.1.7 - 2015-01-14
 
 - Minified js support - file.min.js isn't compressed again, and is added first to build.

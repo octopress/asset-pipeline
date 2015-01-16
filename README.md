@@ -5,8 +5,7 @@ Combine and compress and fingerprint Stylesheets (CSS and Sass) and Javascripts 
 [![Build Status](https://travis-ci.org/octopress/asset-pipeline.png?branch=master)](https://travis-ci.org/octopress/asset-pipeline)
 [![Gem Version](https://badge.fury.io/rb/octopress-asset-pipeline.png)](http://badge.fury.io/rb/octopress-asset-pipeline)
 
-**How it works:** This plugin will automatically search Jekyll's site index for .js, .coffee, .css, .scss and .sass
-files and combine, compress and fingerprint them so they're ready for deployment. Then add the liquid tags to your site layout to write
+**How it works:** This plugin will automatically read .js, .coffee, .css, .scss and .sass files from your site, combine, compress and fingerprint them so they're ready for deployment. Then add the liquid tags to your site layout to write
 the necessary script or link tags.
 
 ## Installation
@@ -32,6 +31,18 @@ Then add the gem to your Jekyll configuration.
     gems:
       -octopress-asset-pipeline
 
+## Basic usage
+
+This should be very simple to use.
+
+1. Ass Sass or CSS to `stylesheets/` or `css/` directory in your site's source.
+1. Ass Coffeescript or JS to `stylesheets/` or `css/` directory in your site's source.
+2. Put Coffeescript and JS in `[source]/javascripts/`.
+3. Add a liquid tags to your sites layout.
+4. Build.
+
+If you want, you can configure which directories this plugin reads from. See the configuration section below.
+
 ## Liquid tags
 
 Include these tags in your site's layout.
@@ -41,7 +52,7 @@ Include these tags in your site's layout.
 {% js_asset_tag %}
 ```
 
-When Jekyll is compiled these will be replaced with something like this.
+When Jekyll builds your site, these will be replaced with something like this.
 
 ```
 <link href='/stylesheets/all-b5c56f2652600cde201589531c453ba1.css' media='all' rel='stylesheet' type='text/css'>
@@ -55,6 +66,8 @@ the configurations are set in the `_config.yml` configuration file under the `as
 
 | Option               | Description                               | Default     |
 |:---------------------|:------------------------------------------|:------------|
+| `stylesheets_dir`    | Directory to read stylesheets from        | ['css', 'stylesheets'] |
+| `javascripts_dir`    | Directory to read javascripts from        | ['js', 'javascripts'] |
 | `combine_css`        | Combine all .css, .scss and .sass files   | true        |
 | `combine_js`         | Combine all .js and .coffee files         | true        |
 | `compress_css`       | Compress stylesheets for production       | true        |
