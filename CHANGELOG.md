@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.1 - 2015-01-28
+
+- Fix: javascripts ending in .min.js can be sorted manually.
+
 ### 2.0.0 - 2015-01-15
 
 - Change: Reads stylesheets from: `css/` and `stylesheets/`.
