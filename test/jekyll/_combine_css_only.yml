@@ -1,0 +1,3 @@
+asset_pipeline:
+  combine_js: false
+destination: _site_combine_css_only

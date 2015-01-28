@@ -117,15 +117,10 @@ module Octopress
       #
       def add_static_files
         find_static_assets(asset_dirs, '.js', '.css').each do |f|
-          if f.path =~ /\.js$/ 
-            if f.path =~ /\.min\.js$/i
-              @no_compress_js << Javascript.new(self, f)
-            else f.path =~ /\.js$/ 
-              @js << Javascript.new(self, f)
-            end
+          if File.extname(f.path) == '.js'
+            @js << Javascript.new(self, f)
             Octopress.site.static_files.delete(f) if combine_js
-
-          elsif f.path =~ /\.css$/
+          elsif File.extname(f.path) == '.css'
             @css << Css.new(self, f)
             Octopress.site.static_files.delete(f) if combine_css
           end

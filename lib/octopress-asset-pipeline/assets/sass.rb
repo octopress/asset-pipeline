@@ -1,12 +1,14 @@
 module Octopress
   module AssetPipeline
     class Sass < Css
+      attr_reader :render
+
       def ext
-        file.ext
+        file_object.ext
       end
 
       def path
-        Pathname.new File.join(Octopress.site.source, file.path)
+        File.join(Octopress.site.source, file)
       end
 
       def destination
@@ -14,14 +16,23 @@ module Octopress
       end
 
       def add
-        Ink::Plugins.static_files << Ink::StaticFileContent.new(compile, destination)
+        Ink::Plugins.static_files << Ink::StaticFileContent.new(content, destination)
       end
 
       def data
-        file.data
+        file_object.data
       end
 
-      def compile
+      def content
+        @render ||= begin
+          contents = super
+          if asset_payload = payload
+            Liquid::Template.parse(contents).render!(payload)
+          else
+            contents
+          end
+        end
+
         Ink::PluginAssetPipeline.compile_sass(self)
       end
     end

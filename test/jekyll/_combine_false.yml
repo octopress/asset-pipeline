@@ -1,0 +1,6 @@
+asset_pipeline:
+  order_js:
+    - foo.coffee
+  combine_js: false
+  combine_css: false
+destination: _site_combine_false

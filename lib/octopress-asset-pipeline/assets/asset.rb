@@ -1,9 +1,12 @@
 module Octopress
   module AssetPipeline
     class Asset < Ink::Assets::Asset
-      def initialize(plugin, file)
+      attr_reader :file_object
+
+      def initialize(plugin, object)
         @plugin = plugin
-        @file = file
+        @file_object = object
+        @file = object.path
       end
 
       def info
@@ -17,7 +20,7 @@ module Octopress
       end
 
       def base
-        file.relative_path.sub(filename,'').sub(/^\/(.+)\/$/,'\1')
+        file_object.relative_path.sub(filename,'').sub(/^\/(.+)\/$/,'\1')
       end
 
       def destination
@@ -25,7 +28,7 @@ module Octopress
       end
 
       def path
-        Pathname.new file.path
+        file
       end
 
       # Copy is unncessary with local assets

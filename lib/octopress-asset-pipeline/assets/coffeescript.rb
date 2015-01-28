@@ -1,12 +1,12 @@
 module Octopress
   module AssetPipeline
     class Coffeescript < Javascript
-      def compile
-        ::CoffeeScript.compile(file.content)
+      def content
+        ::CoffeeScript.compile(super)
       end
 
       def path
-        Pathname.new File.join(Octopress.site.source, file.path)
+        File.join(Octopress.site.source, file)
       end
 
       def destination

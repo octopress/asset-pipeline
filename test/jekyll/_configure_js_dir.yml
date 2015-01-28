@@ -1,0 +1,3 @@
+asset_pipeline:
+  javascripts_dir: javascript
+destination: _site_configure_js_dir

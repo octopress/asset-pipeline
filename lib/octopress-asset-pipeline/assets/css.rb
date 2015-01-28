@@ -6,11 +6,15 @@ module Octopress
       end
 
       def destination
-        File.join(base, filename.sub(/@(.+?)\./,'.'))
+        File.join(base, output_file_name)
       end
-
+      
       def tag
         "<link href='#{Filters.expand_url(destination)}' media='#{media}' rel='stylesheet' type='text/css'>"
+      end
+
+      def output_file_name
+        filename.sub(/@/,'-')
       end
     end
   end

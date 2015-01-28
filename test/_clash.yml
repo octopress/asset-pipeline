@@ -1,0 +1,45 @@
+-
+  title: Typical build (combined and compressed)
+  build: true
+  dir: jekyll
+  compare: _expected/standard _site
+-
+  title: Configure stylesheets_dir
+  build: true
+  dir: jekyll
+  config:
+    jekyll:
+      - _config.yml
+      - _configure_css_dir.yml
+  compare: 
+    - _expected/configure_css_dir/css _site_configure_css_dir/css
+    - _expected/configure_css_dir/stylesheets _site_configure_css_dir/stylesheets
+-
+  title: Configure javascripts_dir
+  build: true
+  dir: jekyll
+  config:
+    jekyll:
+      - _config.yml
+      - _configure_js_dir.yml
+  compare:
+    - _expected/configure_js_dir/js _site_configure_js_dir/js
+    - _expected/configure_js_dir/javascripts _site_configure_js_dir/javascripts
+-
+  title: Combine CSS only
+  build: true
+  dir: jekyll
+  config:
+    jekyll:
+      - _config.yml
+      - _combine_css_only.yml
+  compare: _expected/combine_css_only _site_combine_css_only
+-
+  title: Separate asset files
+  build: true
+  dir: jekyll
+  config: 
+    jekyll:
+      - _config.yml
+      - _combine_false.yml
+  compare: _expected/combine_false _site_combine_false
