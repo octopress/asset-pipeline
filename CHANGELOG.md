@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.2 - 2015-02-15
+
+- Now using the default sorting built in to Octopress Ink.
+
 ### 2.0.1 - 2015-01-28
 
 - Fix: javascripts ending in .min.js can be sorted manually.

@@ -48,7 +48,7 @@ module Octopress
         add_javascripts
       end
 
-      def config
+      def config(*args)
         @config ||= begin
           c = Ink.configuration['asset_pipeline']
           {
@@ -56,15 +56,6 @@ module Octopress
             'javascripts_dir' => ['javascripts', 'js']
           }.merge(c).merge({ 'disable' => {} })
         end
-      end
-
-      # Return stylesheets to be combined in the asset pipeline
-      def stylesheets
-        sort(@css.clone.concat(@sass), config['order_css'] || [])
-      end
-
-      def javascripts
-        sort(@js.clone.concat(@coffee), config['order_js'] || [])
       end
 
       private
