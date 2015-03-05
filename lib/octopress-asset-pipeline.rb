@@ -11,20 +11,8 @@ require 'octopress-asset-pipeline/assets/coffeescript'
 module Octopress
   module AssetPipeline
     class Plugin < Ink::Plugin
-      def configuration
-        {
-          name:          "Octopress Asset Pipeline",
-          gem:           "octopress-asset-pipeline",
-          path:          File.expand_path(File.join(File.dirname(__FILE__), "../")),
-          type:          "plugin",
-          version:       Octopress::AssetPipeline::VERSION,
-          description:   "Combine and compress Stylesheets and Javascripts into a single fingerprinted file.",
-          source_url:    "https://github.com/octopress/asset-pipeline",
-          local: true
-        }
-      end
-
       def register
+        reset
         # Tell Jekyll to read static files and pages
         # This is necessary when Jekyll isn't being asked to build a site,
         # like when a user runs the list command to list assets
@@ -160,4 +148,12 @@ module Octopress
   end
 end
 
-Octopress::Ink.register_plugin(Octopress::AssetPipeline::Plugin)
+Octopress::Ink.register_plugin(Octopress::AssetPipeline::Plugin, {
+  name:          "Octopress Asset Pipeline",
+  gem:           "octopress-asset-pipeline",
+  path:          File.expand_path(File.join(File.dirname(__FILE__), "../")),
+  version:       Octopress::AssetPipeline::VERSION,
+  description:   "Combine and compress Stylesheets and Javascripts into a single fingerprinted file.",
+  source_url:    "https://github.com/octopress/asset-pipeline",
+  local: true
+})
