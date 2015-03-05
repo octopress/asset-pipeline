@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.3 - 2015-03-04
+
+- Added plugin reset and compatibility with the latest Octopress Ink.
+
 ### 2.0.2 - 2015-02-15
 
 - Now using the default sorting built in to Octopress Ink.
