@@ -35,10 +35,10 @@ Then add the gem to your Jekyll configuration.
 
 This should be very simple to use.
 
-1. Ass Sass or CSS to `stylesheets/` or `css/` directory in your site's source.
-1. Ass Coffeescript or JS to `stylesheets/` or `css/` directory in your site's source.
+1. Add Sass or CSS to `stylesheets/` or `css/` directory in your site's source.
+1. Add Coffeescript or JS to `stylesheets/` or `css/` directory in your site's source.
 2. Put Coffeescript and JS in `[source]/javascripts/`.
-3. Add a liquid tags to your sites layout.
+3. Add liquid tags (see below) to your sites layout.
 4. Build.
 
 If you want, you can configure which directories this plugin reads from. See the configuration section below.
