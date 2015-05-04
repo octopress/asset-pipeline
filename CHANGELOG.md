@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.4 - 2015-05-04
+
+- Updated dependency to latest Octopress Ink.
+
 ### 2.0.3 - 2015-03-04
 
 - Added plugin reset and compatibility with the latest Octopress Ink.
