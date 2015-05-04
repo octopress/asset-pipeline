@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Brandon Mathis"]
   spec.email         = ["brandon@imathis.com"]
   spec.summary       = %q{Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.}
-  spec.description   = %q{Combine and compress CSS and Sass, Javascript and Coffeescript to a single fingerprinted file.}
   spec.homepage      = "https://github.com/octopress/asset-pipeline"
   spec.license       = "MIT"
 
@@ -18,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "octopress-ink", "~> 1.0.0.rc"
+  spec.add_runtime_dependency "octopress-ink", "~> 1.1.0"
   
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "clash"
