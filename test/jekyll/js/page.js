@@ -1,0 +1,3 @@
+---
+---
+var awesome = '{{ site.awesome }}'
