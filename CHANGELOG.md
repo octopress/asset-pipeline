@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.5 - 2015-05-24
+
+- Now js and css files with YAML front-matter are now rendered as pages before added to asset pipeline.
+
 ### 2.0.4 - 2015-05-04
 
 - Updated dependency to latest Octopress Ink.
