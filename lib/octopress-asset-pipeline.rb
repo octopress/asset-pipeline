@@ -2,14 +2,15 @@ require 'octopress'
 require 'octopress-ink'
 require 'octopress-asset-pipeline/version'
 
-require 'octopress-asset-pipeline/assets/asset'
-require 'octopress-asset-pipeline/assets/css'
-require 'octopress-asset-pipeline/assets/sass'
-require 'octopress-asset-pipeline/assets/javascript'
-require 'octopress-asset-pipeline/assets/coffeescript'
-
 module Octopress
   module AssetPipeline
+
+    autoload :Asset,                'octopress-asset-pipeline/assets/asset'
+    autoload :Css,                  'octopress-asset-pipeline/assets/css'
+    autoload :Sass,                 'octopress-asset-pipeline/assets/sass'
+    autoload :Javascript,           'octopress-asset-pipeline/assets/javascript'
+    autoload :Coffeescript,         'octopress-asset-pipeline/assets/coffeescript'
+
     class Plugin < Ink::Plugin
       def register
         reset
