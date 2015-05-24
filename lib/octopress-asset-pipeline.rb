@@ -109,13 +109,19 @@ module Octopress
       # Finds Sass and Coffeescript files files registered by Jekyll
       #
       def add_page_files
-        find_page_assets(asset_dirs, '.scss', '.sass', '.coffee').each do |f|
+        find_page_assets(asset_dirs, '.scss', '.sass', '.coffee', '.js', '.css').each do |f|
           if f.ext =~ /\.coffee$/ 
             @coffee << Coffeescript.new(self, f)
             Octopress.site.pages.delete(f) if combine_js
           elsif f.ext =~ /\.s[ca]ss/ 
             @sass << Sass.new(self, f)
             Octopress.site.pages.delete(f) if combine_css
+          elsif f.ext =~ /\.css/ 
+            @css << Css.new(self, f)
+            Octopress.site.pages.delete(f) if combine_css
+          elsif f.ext =~ /\.js/ 
+            @js << Javascript.new(self, f)
+            Octopress.site.pages.delete(f) if combine_js
           end
         end
       end
