@@ -2,8 +2,8 @@
 
 Combine and compress and fingerprint Stylesheets (CSS and Sass) and Javascripts (JS and Coffeescript) to a single fingerprinted .css or .js file.
 
-[![Build Status](https://travis-ci.org/octopress/asset-pipeline.png?branch=master)](https://travis-ci.org/octopress/asset-pipeline)
-[![Gem Version](https://badge.fury.io/rb/octopress-asset-pipeline.png)](http://badge.fury.io/rb/octopress-asset-pipeline)
+[![Build Status](https://travis-ci.org/octopress/asset-pipeline.svg?branch=master)](https://travis-ci.org/octopress/asset-pipeline)
+[![Gem Version](https://badge.fury.io/rb/octopress-asset-pipeline.svg)](http://badge.fury.io/rb/octopress-asset-pipeline)
 
 **How it works:** This plugin will automatically read .js, .coffee, .css, .scss and .sass files from your site, combine, compress and fingerprint them so they're ready for deployment. Then add the liquid tags to your site layout to write
 the necessary script or link tags.
