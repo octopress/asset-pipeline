@@ -53,10 +53,6 @@ module Octopress
         [config['stylesheets_dir'], config['javascripts_dir']].flatten
       end
 
-      def css_dirs
-        config['stylesheets_dir']
-      end
-
       def combine_css
         config['combine_css']
       end
