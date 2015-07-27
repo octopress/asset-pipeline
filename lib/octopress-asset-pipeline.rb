@@ -40,9 +40,21 @@ module Octopress
       def config(*args)
         @config ||= begin
           c = Ink.configuration['asset_pipeline']
+
+          # Deprecation - remove in 2.1
+          if c['javascripts_dir']
+            warn('Deprecation Warning:'.yellow + ' Asset_pipeline configuration key `javascripts_dir` has been renamed to `javascripts_source`. Please update your configuration.')
+            c['javascripts_source'] = c.delete('javascripts_dir')
+          end
+          
+          if c['stylesheets_dir']
+            warn('Deprecation Warning:'.yellow + ' Asset_pipeline configuration key `stylesheets_dir` has been renamed to `stylesheets_source`. Please update your configuration.')
+            c['stylesheets_source'] = c.delete('stylesheets_dir')
+          end
+
           {
-            'stylesheets_dir' => ['stylesheets', 'css'],
-            'javascripts_dir' => ['javascripts', 'js']
+            'stylesheets_source' => ['stylesheets', 'css'],
+            'javascripts_source' => ['javascripts', 'js']
           }.merge(c).merge({ 'disable' => {} })
         end
       end
@@ -50,7 +62,7 @@ module Octopress
       private
 
       def asset_dirs
-        [config['stylesheets_dir'], config['javascripts_dir']].flatten
+        [config['stylesheets_source'], config['javascripts_source']].flatten
       end
 
       def combine_css
