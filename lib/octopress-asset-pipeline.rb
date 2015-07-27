@@ -41,7 +41,7 @@ module Octopress
         @config ||= begin
           c = Ink.configuration['asset_pipeline']
 
-          # Deprecation - remove in 2.1
+          # Deprecation warning - remove in 2.1
           if c['javascripts_dir']
             warn('Deprecation Warning:'.yellow + ' Asset_pipeline configuration key `javascripts_dir` has been renamed to `javascripts_source`. Please update your configuration.')
             c['javascripts_source'] = c.delete('javascripts_dir')

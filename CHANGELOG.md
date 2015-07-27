@@ -1,5 +1,10 @@
 # Changelog
 
+### 2.0.5 - 2015-07-26
+
+- Deprecation: Configuration keys `stylesheets_dir` and `javascripts_dir` have been renamed to `stylesheets_source` and `javascripts_source` to be more Jekyll-like.
+
+
 ### 2.0.5 - 2015-05-24
 
 - Now js and css files with YAML front-matter are now rendered as pages before added to asset pipeline.
